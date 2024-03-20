@@ -7,9 +7,8 @@ The 3040Crypto Wallet API is designed to provide a comprehensive suite of servic
 ## Endpoints with Parameters
 
 ### 1. Register User
-**Description:** This endpoint facilitates new user registrations, capturing essential information to create a secure and personalized account.
+**Description:** This POST endpoint facilitates new user registrations, capturing essential information to create a secure and personalized account.
 - **Endpoint:** `/api/user/register`
-- **Method:** POST
 - **Parameters:**
   - `username`: Desired username, must be unique.
   - `email`: Email address for account verification and communication.
