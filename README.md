@@ -7,8 +7,9 @@ The 3040Crypto Wallet API is designed to provide a comprehensive suite of servic
 ## Endpoints with Parameters
 
 ### 1. Register User
-**Description:** This POST endpoint facilitates new user registrations, capturing essential information to create a secure and personalized account.
+**Description:** Streamlines the process of registering new users by collecting vital information to set up a secure and tailored account.
 - **Endpoint:** `/api/user/register`
+- **Operation:** POST
 - **Parameters:**
   - `username`: Desired username, must be unique.
   - `email`: Email address for account verification and communication.
@@ -17,15 +18,17 @@ The 3040Crypto Wallet API is designed to provide a comprehensive suite of servic
   - `phoneNumber`: Phone number for account recovery and additional security options.
 
 ### 2. Create New Wallet
-**Description:** This is a POST method that allows users to create a new cryptocurrency wallet, which returns a unique wallet ID for subsequent transactions and queries.
+**Description:** Enables the initiation of a new cryptocurrency wallet, providing a unique identifier for the wallet that is crucial for future transactions and inquiries.
 - **Endpoint:** `/api/wallet/create`
+- **Operation:** POST
 - **Parameters:**
   - `user_id`: The unique identifier for the user.
   - `email`: The user's email address for notifications and recovery purposes.
 
 ### 3. Get Wallet Balance
-**Description:** This is a GET method that retrieves the current balance of the specified cryptocurrency in the user's wallet, allowing for real-time financial management.
+**Description:** Facilitates the retrieval of the current balance for a chosen cryptocurrency within the user's wallet, supporting effective financial oversight.
 - **Endpoint:** `/api/wallet/balance`
+- **Operation:** GET
 - **Parameters:**
   - `wallet_id`: The unique identifier of the user's wallet.
   - `currency`: The specific cryptocurrency to check the balance for. Defaults to Bitcoin (BTC) if not specified.
