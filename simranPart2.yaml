@@ -1,0 +1,110 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: 3040Crypto Wallet API
+  description: |
+    The 3040Crypto Wallet API is designed to provide a comprehensive suite of services for managing cryptocurrency wallets. It enables users to create new wallets, check balances, and view transaction histories, ensuring a seamless and user-friendly experience. This API aims to establish 3040Crypto as the premier choice for secure and efficient cryptocurrency management.
+tags:
+  - name: Wallet
+    description: Operations related to cryptocurrency wallets.
+servers:
+  - url: https://api.3040crypto.com/v1
+paths:
+  /api/user/register:
+    post:
+      summary: Register User
+      description: Streamlines the process of registering new users by collecting vital information to set up a secure and tailored account.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  example: newUser123
+                  description: Desired username, must be unique.
+                email:
+                  type: string
+                  example: newuser@example.com
+                  description: Email address for account verification and communication.
+                password:
+                  type: string
+                  example: SecurePa$$w0rd
+                  description: Account password, adhering to defined security standards.
+                fullName:
+                  type: string
+                  description: Full name of the user for personalization.
+                phoneNumber:
+                  type: string
+                  description: Phone number for account recovery and additional security options.
+      responses:
+        '200':
+          description: User registration successful. Please verify your email to complete the setup.
+        '400':
+          description: Bad request. Please check your input parameters.
+  /api/wallet/create:
+    post:
+      summary: Create New Wallet
+      description: Enables the initiation of a new cryptocurrency wallet, providing a unique identifier for the wallet that is crucial for future transactions and inquiries.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_id:
+                  type: string
+                  example: 65373
+                  description: The unique identifier for the user.
+                email:
+                  type: string
+                  example: sample@example.com
+                  description: The user's email address for notifications and recovery purposes.
+      responses:
+        '200':
+          description: Wallet successfully created.
+        '400':
+          description: Bad request. Please check your input parameters.
+  /api/wallet/balance:
+    get:
+      summary: Get Wallet Balance
+      description: Facilitates the retrieval of the current balance for a chosen cryptocurrency within the user's wallet, supporting effective financial oversight.
+      parameters:
+        - name: wallet_id
+          in: query
+          description: The unique identifier of the user's wallet.
+          required: true
+          schema:
+            type: string
+            example: abcde12345
+        - name: currency
+          in: query
+          description: The specific cryptocurrency to check the balance for. Defaults to Bitcoin (BTC) if not specified.
+          required: false
+          schema:
+            type: string
+            example: BTC
+      responses:
+        '200':
+          description: Retrieved wallet balance successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WalletBalance'
+        '400':
+          description: Bad request. Please check your input parameters.
+components:
+  schemas:
+    WalletBalance:
+      type: object
+      properties:
+        wallet_id:
+          type: string
+          description: The unique identifier for the wallet.
+        currency:
+          type: string
+          description: The cryptocurrency symbol.
+        balance:
+          type: number
+          description: The balance amount in the specified cryptocurrency.
